@@ -53,6 +53,7 @@ export function warm() {
 export function handleSummary(data) {
   const vus = 'vus' in data.metrics ? data.metrics.vus.values.value : '-'
   const testRunDurationMs = data.state.testRunDurationMs
+  const dataRecived = data.metrics.data_received.values.count
 
   const cold = data.metrics.cold_scenario_http_req_duration.values
   const coldObj = {
@@ -66,7 +67,8 @@ export function handleSummary(data) {
     ['p(90)']: cold['p(90)'],
     ['p(95)']: cold['p(95)'],
     ['p(99)']: cold['p(99)'],
-    ['p(99.99)']: cold['p(99.99)']
+    ['p(99.99)']: cold['p(99.99)'],
+    'data recived 1': dataRecived / cold.count
   }
 
   const warm = data.metrics.warm_scenario_http_req_duration.values
@@ -81,7 +83,8 @@ export function handleSummary(data) {
     ['p(90)']: warm['p(90)'],
     ['p(95)']: warm['p(95)'],
     ['p(99)']: warm['p(99)'],
-    ['p(99.99)']: warm['p(99.99)']
+    ['p(99.99)']: warm['p(99.99)'],
+    'data recived 1': dataRecived / warm.count
   }
 
   return {

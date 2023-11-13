@@ -4,7 +4,7 @@ trap "echo 'stopping servers and removing containers;' && docker rm -f node_cont
 
 PORT=3000
 DOCKER_BIND=127.0.0.1:$PORT:$PORT
-SLEEP_TIME=2
+SLEEP_TIME=1
 
 DATE=$(date +"%Y.%m.%d-%H:%M:%S")
 
