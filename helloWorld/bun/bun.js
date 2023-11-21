@@ -1,8 +1,6 @@
-const port = Bun.env.PORT || 3000
 Bun.serve({
-  port: port,
+  port: 3000,
   fetch(req) {
     return new Response('Hello World!')
   }
 })
-console.log(`bun server listening on port: ${port}`)
