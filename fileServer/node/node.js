@@ -1,7 +1,7 @@
 require('http')
   .createServer(function (req, res) {
     require('fs').readFile('jquery.js', function (err, data) {
-      if (!err) {
+      if (err) {
         res.statusCode = 500
         res.end(`Error getting the file: ${err}.`)
       } else {

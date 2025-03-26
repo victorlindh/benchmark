@@ -1,6 +1,18 @@
 import http from 'k6/http'
 export const options = {
-  iterations: 10000000,
+  summaryTimeUnit: 'ms',
+  summaryTrendStats: [
+    'count',
+    'avg',
+    'min',
+    'med',
+    'max',
+    'p(90)',
+    'p(95)',
+    'p(99)',
+    'p(99.99)'
+  ],
+  iterations: 10000,
   vus: 100
 }
 export default function () {

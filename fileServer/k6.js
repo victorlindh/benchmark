@@ -15,8 +15,9 @@ export const options = {
     'p(99)',
     'p(99.99)'
   ],
-  iterations: 10000000,
-  vus: 100
+  iterations: 100000,
+  vus: 100,
+  duration: '20m'
 }
 
 export default function () {
@@ -24,12 +25,16 @@ export default function () {
 }
 
 export function handleSummary(data) {
+  console.log(data)
   const vus = 'vus' in data.metrics ? data.metrics.vus.values.value : '-'
   const testRunDurationMs = data.state.testRunDurationMs
   const dataRecived = data.metrics.data_received.values.count
+  const failed = data.metrics.http_req_failed.values.fails
+  const passes = data.metrics.http_req_failed.values.passes
 
-  const cold = data.metrics.cold_scenario_http_req_duration.values
+  const cold = data.metrics.http_req_duration.values
   const coldObj = {
+    name: __ENV.NAME,
     vus,
     testRunDurationMs,
     count: cold.count,
@@ -41,7 +46,9 @@ export function handleSummary(data) {
     ['p(95)']: cold['p(95)'],
     ['p(99)']: cold['p(99)'],
     ['p(99.99)']: cold['p(99.99)'],
-    'data recived 1': dataRecived / cold.count
+    'data recived 1': dataRecived / cold.count,
+    failed,
+    passes
   }
 
   return {
